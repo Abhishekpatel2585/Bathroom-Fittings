@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dealer Login - Bathroom Fittings</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="hero" aria-hidden="true">
+            <!-- subtle waves reused from registration page -->
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                <path fill="rgba(255,215,0,0.04)" d="M0,96L48,85.3C96,75,192,53,288,48C384,43,480,53,576,80C672,107,768,149,864,176C960,203,1056,213,1152,186.7C1248,160,1344,96,1392,64L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+            </svg>
+        </div>
+
+        <main class="registration-container">
+            <div class="glass-card" style="max-width:420px;">
+                <header class="card-header text-center">
+                    <svg class="faucet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" aria-hidden="true">
+                        <path fill="#ffd700" d="M7 3v4H5a1 1 0 0 0-1 1v2h12V8a3 3 0 0 0-3-3h-6z" />
+                    </svg>
+                    <h1 class="brand">Dealer Login</h1>
+                    <p class="subtitle">Access your dealer dashboard</p>
+                </header>
+
+                <form action="login.php" method="POST" id="loginForm" novalidate>
+                    <div class="mb-3 floating-label">
+                        <input type="tel" name="dealer_contact" id="dealer_contact" class="form-control" placeholder=" " pattern="[0-9]{10}" required>
+                        <label for="dealer_contact">Contact Number</label>
+                    </div>
+                    <div class="mb-3 floating-label">
+                        <input type="password" name="dealer_password" id="dealer_password" class="form-control" placeholder=" " required>
+                        <label for="dealer_password">Password</label>
+                    </div>
+
+                                        <div id="loginError" class="mb-3" style="display:none;">
+                                            <div class="alert alert-danger" role="alert" id="loginErrorText"></div>
+                                        </div>
+
+                    <div class="d-grid mt-2">
+                        <button type="submit" class="btn btn-luxury">Login</button>
+                    </div>
+
+                    <p class="form-text text-center mt-3">Don’t have an account? <a href="registration.html">Register here</a></p>
+                </form>
+            </div>
+
+            <div class="bubbles" aria-hidden="true">
+                <span style="--i:1"></span>
+                <span style="--i:2"></span>
+                <span style="--i:3"></span>
+            </div>
+        </main>
+
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                    // Show server-side login error if present in URL (login.php redirects with ?error=...)
+                    (function(){
+                        const params = new URLSearchParams(window.location.search);
+                        const err = params.get('error');
+                        if (err) {
+                            const el = document.getElementById('loginError');
+                            const txt = document.getElementById('loginErrorText');
+                            if (el && txt) {
+                                txt.textContent = decodeURIComponent(err);
+                                el.style.display = 'block';
+                                // remove query string from URL without reloading
+                                if (window.history && window.history.replaceState) {
+                                    const cleanUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+                                    window.history.replaceState({}, document.title, cleanUrl);
+                                }
+                            } else {
+                                alert(decodeURIComponent(err));
+                            }
+                        }
+                    })();
+                </script>
+    </body>
+</html>
